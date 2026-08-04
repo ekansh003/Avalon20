@@ -12,20 +12,9 @@ import { Section } from "lucide-react";
 export default function Home() {
   return (
     <div className=" h-full w-full overflow-x-hidden overflow-y-scroll snap-y snap-mandatory bg-zinc-50 dark:bg-black select-none scroll-smooth">
-      {/* <section className="h-screen w-full snap-start snap-always shrink-0">
-        <HeroSection />
-      </section> */}
-
-      {/* <ToggleSection /> */}
-      {/* <BirthdayMagic /> */}
-
-      {/* <StellarCardGallerySingle/> */}
-      {/* <StellarCardGallerySingle/> */}
-      {/* <HeroSection /> */}
-
       <section className="h-screen  w-full snap-start snap-always shrink-0 overflow-visible relative z-10">
         <iframe
-          src="/birthday.html"
+          src="/avalon20.html"
           title="Birthday Reveal"
           style={{
             width: "100vw",
