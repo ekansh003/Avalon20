@@ -1,4 +1,4 @@
-declare module 'page-flip' {
+declare module "page-flip" {
   export class PageFlip {
     constructor(element: HTMLElement, setting: any);
     loadFromImages(images: string[]): void;
