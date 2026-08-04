@@ -17,11 +17,11 @@ npm install @splinetool/react-spline @splinetool/runtime
 ## Basic Usage
 
 ```tsx
-import Spline from '@splinetool/react-spline';
+import Spline from "@splinetool/react-spline";
 
 function Hero() {
   return (
-    <div style={{ width: '100%', height: '100vh' }}>
+    <div style={{ width: "100%", height: "100vh" }}>
       <Spline scene="https://prod.spline.design/YOUR_ID/scene.splinecode" />
     </div>
   );
@@ -35,11 +35,11 @@ function Hero() {
 The Spline runtime is **~500KB+**. Always lazy-load it to avoid blocking your initial page render.
 
 ```tsx
-'use client'; // Required for Next.js app router
+"use client"; // Required for Next.js app router
 
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy } from "react";
 
-const Spline = lazy(() => import('@splinetool/react-spline'));
+const Spline = lazy(() => import("@splinetool/react-spline"));
 
 interface SplineSceneProps {
   scene: string;
@@ -53,11 +53,11 @@ export function SplineScene({ scene, className, onLoad }: SplineSceneProps) {
       fallback={
         <div
           style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
           <span className="loader" />
@@ -76,7 +76,7 @@ export function SplineScene({ scene, className, onLoad }: SplineSceneProps) {
 <SplineScene
   scene="https://prod.spline.design/YOUR_ID/scene.splinecode"
   className="w-full h-full"
-  onLoad={(app) => console.log('Scene ready!', app)}
+  onLoad={(app) => console.log("Scene ready!", app)}
 />
 ```
 
@@ -87,8 +87,8 @@ export function SplineScene({ scene, className, onLoad }: SplineSceneProps) {
 The `onLoad` callback gives you a reference to the Spline Application object. Use it to interact with the scene:
 
 ```tsx
-import { useRef, useCallback } from 'react';
-import Spline from '@splinetool/react-spline';
+import { useRef, useCallback } from "react";
+import Spline from "@splinetool/react-spline";
 
 function InteractiveScene() {
   const splineRef = useRef(null);
@@ -97,26 +97,26 @@ function InteractiveScene() {
     splineRef.current = app;
 
     // Find objects
-    const cube = app.findObjectByName('MyCube');
-    console.log('Cube position:', cube?.position);
+    const cube = app.findObjectByName("MyCube");
+    console.log("Cube position:", cube?.position);
 
     // Listen for events
-    app.addEventListener('mouseDown', (e) => {
-      console.log('Clicked:', e.target.name);
+    app.addEventListener("mouseDown", (e) => {
+      console.log("Clicked:", e.target.name);
     });
   }, []);
 
   // External control function
   const triggerAnimation = () => {
     if (splineRef.current) {
-      splineRef.current.emitEvent('mouseDown', 'PlayButton');
+      splineRef.current.emitEvent("mouseDown", "PlayButton");
     }
   };
 
   return (
     <div>
       <button onClick={triggerAnimation}>Play</button>
-      <div style={{ width: '100%', height: '80vh' }}>
+      <div style={{ width: "100%", height: "80vh" }}>
         <Spline
           scene="https://prod.spline.design/YOUR_ID/scene.splinecode"
           onLoad={handleLoad}
@@ -145,7 +145,7 @@ function DataDrivenScene() {
   // Sync React state with Spline variable
   useEffect(() => {
     if (splineRef.current) {
-      splineRef.current.setVariable('progress', progress);
+      splineRef.current.setVariable("progress", progress);
     }
   }, [progress]);
 
@@ -176,13 +176,13 @@ function DataDrivenScene() {
 The Spline component uses browser APIs, so it must be a **client component**:
 
 ```tsx
-'use client';
+"use client";
 
-import Spline from '@splinetool/react-spline/next';
+import Spline from "@splinetool/react-spline/next";
 
 export default function Hero() {
   return (
-    <div style={{ width: '100%', height: '100vh' }}>
+    <div style={{ width: "100%", height: "100vh" }}>
       <Spline scene="https://prod.spline.design/YOUR_ID/scene.splinecode" />
     </div>
   );
@@ -196,16 +196,16 @@ export default function Hero() {
 Works the same as standard React. Use dynamic import to avoid SSR issues:
 
 ```tsx
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-const Spline = dynamic(() => import('@splinetool/react-spline'), {
+const Spline = dynamic(() => import("@splinetool/react-spline"), {
   ssr: false,
   loading: () => <div className="spinner" />,
 });
 
 export default function Page() {
   return (
-    <div style={{ width: '100%', height: '100vh' }}>
+    <div style={{ width: "100%", height: "100vh" }}>
       <Spline scene="https://prod.spline.design/YOUR_ID/scene.splinecode" />
     </div>
   );
@@ -219,7 +219,7 @@ export default function Page() {
 The Spline App object doesn't ship with great types. Here's a useful type reference:
 
 ```tsx
-import type { Application } from '@splinetool/runtime';
+import type { Application } from "@splinetool/runtime";
 
 // Common object type (approximate)
 interface SplineObject {
@@ -238,7 +238,7 @@ interface SplineEvent {
 
 // Usage with onLoad
 const handleLoad = (app: Application) => {
-  const obj = app.findObjectByName('Cube');
+  const obj = app.findObjectByName("Cube");
   if (obj) {
     obj.position.x = 2;
   }
@@ -252,7 +252,7 @@ const handleLoad = (app: Application) => {
 ### Fill Container
 
 ```tsx
-<div style={{ width: '100%', height: '100vh', position: 'relative' }}>
+<div style={{ width: "100%", height: "100vh", position: "relative" }}>
   <SplineScene scene="..." className="absolute inset-0" />
 </div>
 ```
@@ -262,7 +262,7 @@ const handleLoad = (app: Application) => {
 Show a static image on mobile for better performance:
 
 ```tsx
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 function ResponsiveScene({ scene, fallbackImage }) {
   const [isMobile, setIsMobile] = useState(false);
@@ -270,8 +270,8 @@ function ResponsiveScene({ scene, fallbackImage }) {
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
     check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
   }, []);
 
   if (isMobile && fallbackImage) {
@@ -279,7 +279,7 @@ function ResponsiveScene({ scene, fallbackImage }) {
       <img
         src={fallbackImage}
         alt="3D scene"
-        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        style={{ width: "100%", height: "100%", objectFit: "cover" }}
       />
     );
   }
@@ -295,7 +295,7 @@ function FadeInScene({ scene }) {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
       {!loaded && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/50">
           <div className="spinner" />
@@ -304,7 +304,7 @@ function FadeInScene({ scene }) {
       <SplineScene
         scene={scene}
         onLoad={() => setLoaded(true)}
-        className={`transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+        className={`transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
       />
     </div>
   );
@@ -316,6 +316,7 @@ function FadeInScene({ scene }) {
 ## Common Mistakes
 
 ### 1. Container Has No Height
+
 ```tsx
 // ❌ BAD — Spline fills its parent, but parent has 0 height
 <div>
@@ -329,33 +330,38 @@ function FadeInScene({ scene }) {
 ```
 
 ### 2. Not Lazy Loading
+
 ```tsx
 // ❌ BAD — Loads 500KB+ on initial render
-import Spline from '@splinetool/react-spline';
+import Spline from "@splinetool/react-spline";
 
 // ✅ GOOD — Only loads when component renders
-const Spline = lazy(() => import('@splinetool/react-spline'));
+const Spline = lazy(() => import("@splinetool/react-spline"));
 ```
 
 ### 3. SSR Crashes in Next.js
+
 ```tsx
 // ❌ BAD — Spline uses `window`, crashes on server
-import Spline from '@splinetool/react-spline';
+import Spline from "@splinetool/react-spline";
 
 // ✅ GOOD — Skip SSR
-import dynamic from 'next/dynamic';
-const Spline = dynamic(() => import('@splinetool/react-spline'), { ssr: false });
+import dynamic from "next/dynamic";
+const Spline = dynamic(() => import("@splinetool/react-spline"), {
+  ssr: false,
+});
 
 // ✅ ALSO GOOD — Use the Next.js-specific import
-import Spline from '@splinetool/react-spline/next';
+import Spline from "@splinetool/react-spline/next";
 ```
 
 ### 4. Missing 'use client' in App Router
+
 ```tsx
 // ❌ BAD — Server component by default in Next.js 14+
-import Spline from '@splinetool/react-spline';
+import Spline from "@splinetool/react-spline";
 
 // ✅ GOOD — Mark as client component
-'use client';
-import Spline from '@splinetool/react-spline';
+("use client");
+import Spline from "@splinetool/react-spline";
 ```

@@ -3,12 +3,10 @@
 import { Caveat } from "next/font/google";
 import { DraggableCardBody, DraggableCardContainer } from "./DraggableCards";
 
-
 const handwriting = Caveat({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
-
 
 const images = [
   "girl3.jpg",
@@ -21,7 +19,6 @@ const images = [
   "girl10.jpg",
   "girl11.jpg",
 ];
-
 
 const captions = [
   "Cutie 🥹",
@@ -38,7 +35,6 @@ const captions = [
   "Little Star ⭐",
 ];
 
-
 const positions = [
   "top-[8%] left-[8%] rotate-[-8deg]",
   "top-[15%] left-[35%] rotate-[6deg]",
@@ -54,11 +50,8 @@ const positions = [
   "bottom-[30%] left-[65%] rotate-[4deg]",
 ];
 
-
 export default function LoveGallery() {
-
   return (
-
     <DraggableCardContainer
       className="
         relative
@@ -84,17 +77,10 @@ export default function LoveGallery() {
         after:bg-[radial-gradient(circle,transparent_30%,rgba(0,0,0,0.08))]
       "
     >
-
-
-      {
-        images.map((img,index)=>(
-
-
-          <DraggableCardBody
-
-            key={img}
-
-            className={`
+      {images.map((img, index) => (
+        <DraggableCardBody
+          key={img}
+          className={`
               absolute
 
               ${positions[index]}
@@ -128,22 +114,13 @@ export default function LoveGallery() {
 
               hover:scale-[1.03]
             `}
-
-          >
-
-
-            <div className="relative overflow-visible">
-
-
-              <img
-
-                src={`/ref/${img}`}
-
-                alt={img}
-
-                draggable={false}
-
-                className="
+        >
+          <div className="relative overflow-visible">
+            <img
+              src={`/ref/${img}`}
+              alt={img}
+              draggable={false}
+              className="
                   h-56
                   w-56
 
@@ -156,16 +133,12 @@ export default function LoveGallery() {
 
                   select-none
                 "
+            />
 
-              />
+            {/* floating heart */}
 
-
-
-              {/* floating heart */}
-
-              <div
-
-                className="
+            <div
+              className="
                   absolute
 
                   -top-7
@@ -183,21 +156,14 @@ export default function LoveGallery() {
 
                   drop-shadow-md
                 "
+            >
+              ❤️
+            </div>
 
-              >
+            {/* handwritten caption */}
 
-                ❤️
-
-              </div>
-
-
-
-
-              {/* handwritten caption */}
-
-              <p
-
-                className={`
+            <p
+              className={`
                   mt-3
 
                   text-center
@@ -217,28 +183,14 @@ export default function LoveGallery() {
 
                   pointer-events-none
                 `}
-
-              >
-
-                {captions[index]}
-
-              </p>
-
-
-            </div>
-
-
-          </DraggableCardBody>
-
-
-        ))
-      }
-
-
-
+            >
+              {captions[index]}
+            </p>
+          </div>
+        </DraggableCardBody>
+      ))}
 
       {/* background doodles */}
-
 
       <div
         className="
@@ -256,7 +208,6 @@ export default function LoveGallery() {
         ✿
       </div>
 
-
       <div
         className="
           absolute
@@ -273,7 +224,6 @@ export default function LoveGallery() {
         ♡
       </div>
 
-
       <div
         className="
           absolute
@@ -289,9 +239,6 @@ export default function LoveGallery() {
       >
         ✨
       </div>
-
-
     </DraggableCardContainer>
-
   );
 }

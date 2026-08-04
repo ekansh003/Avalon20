@@ -51,12 +51,12 @@ export const HeroSection = () => {
           <span className="font-light">Happy</span>
           <br />
           <span className="font-bold">Birthday</span>
-          <br/>
+          <br />
           <span className="font-bold text-amber-500">Sweety</span>
         </h1>
         <div className="mt-6 h-px w-16 bg-[#9C7A3F]" />
         <p className="hero-body mt-6 max-w-sm text-base leading-relaxed text-[#4A4A42]">
-         May this year bring you closer to everything you're chasing.
+          May this year bring you closer to everything you're chasing.
         </p>
       </div>
 

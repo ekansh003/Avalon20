@@ -1,16 +1,24 @@
-"use client"
+"use client";
 
-import React, { Suspense, useEffect, useMemo, useRef, useState, createContext, useContext } from "react"
-import * as THREE from "three"
-import { Canvas, useFrame } from "@react-three/fiber"
+import React, {
+  Suspense,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  createContext,
+  useContext,
+} from "react";
+import * as THREE from "three";
+import { Canvas, useFrame } from "@react-three/fiber";
 import {
   OrbitControls,
   Environment,
   Html,
   Plane,
   Sphere,
-} from "@react-three/drei"
-import { Download, Heart, X } from "lucide-react"
+} from "@react-three/drei";
+import { Download, Heart, X } from "lucide-react";
 
 /**
  * Single-file Stellar Card Gallery
@@ -22,57 +30,157 @@ import { Download, Heart, X } from "lucide-react"
    ========================= */
 
 type Card = {
-  id: string
-  imageUrl: string
-  alt: string
-  title: string
-}
+  id: string;
+  imageUrl: string;
+  alt: string;
+  title: string;
+};
 
 type CardContextType = {
-  selectedCard: Card | null
-  setSelectedCard: (card: Card | null) => void
-  cards: Card[]
-}
+  selectedCard: Card | null;
+  setSelectedCard: (card: Card | null) => void;
+  cards: Card[];
+};
 
-const CardContext = createContext<CardContextType | undefined>(undefined)
+const CardContext = createContext<CardContextType | undefined>(undefined);
 
 function useCard() {
-  const ctx = useContext(CardContext)
-  if (!ctx) throw new Error("useCard must be used within CardProvider")
-  return ctx
+  const ctx = useContext(CardContext);
+  if (!ctx) throw new Error("useCard must be used within CardProvider");
+  return ctx;
 }
 
 function CardProvider({ children }: { children: React.ReactNode }) {
-  const [selectedCard, setSelectedCard] = useState<Card | null>(null)
+  const [selectedCard, setSelectedCard] = useState<Card | null>(null);
 
   const cards: Card[] = [
-    { id: "1", imageUrl: "https://i.ibb.co/4ZWcP129/1.png", alt: "Elegant Invitation", title: "Elegant Invitation" },
-    { id: "2", imageUrl: "https://i.ibb.co/TMbhBRcL/2.png", alt: "Modern Design", title: "Modern Design" },
-    { id: "3", imageUrl: "https://i.ibb.co/spXBFdSm/3.png", alt: "Vintage Style", title: "Vintage Style" },
-    { id: "4", imageUrl: "https://i.ibb.co/N2TCN0bC/4.png", alt: "Minimalist", title: "Minimalist" },
-    { id: "5", imageUrl: "https://i.ibb.co/jZkh6q1M/5.png", alt: "Floral Design", title: "Floral Design" },
-    { id: "6", imageUrl: "https://i.ibb.co/6cc7mksr/6.png", alt: "Geometric", title: "Geometric" },
-    { id: "7", imageUrl: "https://i.ibb.co/bjV35jNQ/7.png", alt: "Luxury Gold", title: "Luxury Gold" },
-    { id: "8", imageUrl: "https://i.ibb.co/PZ7WLs7g/8.png", alt: "Rustic Style", title: "Rustic Style" },
-    { id: "9", imageUrl: "https://i.ibb.co/qLR5bQRM/9.png", alt: "Dark Modern", title: "Dark Modern" },
-    { id: "10", imageUrl: "https://i.ibb.co/PdNhw3K/10.png", alt: "Colorful Party", title: "Colorful Party" },
-    { id: "11", imageUrl: "https://i.ibb.co/zWpN1nqJ/11.png", alt: "Geometric", title: "Geometric" },
-    { id: "12", imageUrl: "https://i.ibb.co/fVYnCXgR/12.png", alt: "Luxury Gold", title: "Luxury Gold" },
-    { id: "13", imageUrl: "https://i.ibb.co/1G6jZWcZ/13.png", alt: "Rustic Style", title: "Rustic Style" },
-    { id: "14", imageUrl: "https://i.ibb.co/xKG7m905/14.png", alt: "Dark Modern", title: "Dark Modern" },
-    { id: "15", imageUrl: "https://i.ibb.co/7dJzR3xK/15.png", alt: "Colorful Party", title: "Colorful Party" },
-    { id: "16", imageUrl: "https://i.ibb.co/NdJ1csXB/16.png", alt: "Elegant Script", title: "Elegant Script" },
-    { id: "17", imageUrl: "https://i.ibb.co/8L2Sdt5Q/17.png", alt: "Watercolor Art", title: "Watercolor Art" },
-    { id: "18", imageUrl: "https://i.ibb.co/mC1zxJYq/18.png", alt: "Botanical", title: "Botanical" },
-    { id: "19", imageUrl: "https://i.ibb.co/wryzsKs4/20.png", alt: "Art Deco", title: "Art Deco" },
-    { id: "20", imageUrl: "https://i.ibb.co/1fvnxL3L/19.png", alt: "Marble Luxury", title: "Marble Luxury" },
-  ]
+    {
+      id: "1",
+      imageUrl: "https://i.ibb.co/4ZWcP129/1.png",
+      alt: "Elegant Invitation",
+      title: "Elegant Invitation",
+    },
+    {
+      id: "2",
+      imageUrl: "https://i.ibb.co/TMbhBRcL/2.png",
+      alt: "Modern Design",
+      title: "Modern Design",
+    },
+    {
+      id: "3",
+      imageUrl: "https://i.ibb.co/spXBFdSm/3.png",
+      alt: "Vintage Style",
+      title: "Vintage Style",
+    },
+    {
+      id: "4",
+      imageUrl: "https://i.ibb.co/N2TCN0bC/4.png",
+      alt: "Minimalist",
+      title: "Minimalist",
+    },
+    {
+      id: "5",
+      imageUrl: "https://i.ibb.co/jZkh6q1M/5.png",
+      alt: "Floral Design",
+      title: "Floral Design",
+    },
+    {
+      id: "6",
+      imageUrl: "https://i.ibb.co/6cc7mksr/6.png",
+      alt: "Geometric",
+      title: "Geometric",
+    },
+    {
+      id: "7",
+      imageUrl: "https://i.ibb.co/bjV35jNQ/7.png",
+      alt: "Luxury Gold",
+      title: "Luxury Gold",
+    },
+    {
+      id: "8",
+      imageUrl: "https://i.ibb.co/PZ7WLs7g/8.png",
+      alt: "Rustic Style",
+      title: "Rustic Style",
+    },
+    {
+      id: "9",
+      imageUrl: "https://i.ibb.co/qLR5bQRM/9.png",
+      alt: "Dark Modern",
+      title: "Dark Modern",
+    },
+    {
+      id: "10",
+      imageUrl: "https://i.ibb.co/PdNhw3K/10.png",
+      alt: "Colorful Party",
+      title: "Colorful Party",
+    },
+    {
+      id: "11",
+      imageUrl: "https://i.ibb.co/zWpN1nqJ/11.png",
+      alt: "Geometric",
+      title: "Geometric",
+    },
+    {
+      id: "12",
+      imageUrl: "https://i.ibb.co/fVYnCXgR/12.png",
+      alt: "Luxury Gold",
+      title: "Luxury Gold",
+    },
+    {
+      id: "13",
+      imageUrl: "https://i.ibb.co/1G6jZWcZ/13.png",
+      alt: "Rustic Style",
+      title: "Rustic Style",
+    },
+    {
+      id: "14",
+      imageUrl: "https://i.ibb.co/xKG7m905/14.png",
+      alt: "Dark Modern",
+      title: "Dark Modern",
+    },
+    {
+      id: "15",
+      imageUrl: "https://i.ibb.co/7dJzR3xK/15.png",
+      alt: "Colorful Party",
+      title: "Colorful Party",
+    },
+    {
+      id: "16",
+      imageUrl: "https://i.ibb.co/NdJ1csXB/16.png",
+      alt: "Elegant Script",
+      title: "Elegant Script",
+    },
+    {
+      id: "17",
+      imageUrl: "https://i.ibb.co/8L2Sdt5Q/17.png",
+      alt: "Watercolor Art",
+      title: "Watercolor Art",
+    },
+    {
+      id: "18",
+      imageUrl: "https://i.ibb.co/mC1zxJYq/18.png",
+      alt: "Botanical",
+      title: "Botanical",
+    },
+    {
+      id: "19",
+      imageUrl: "https://i.ibb.co/wryzsKs4/20.png",
+      alt: "Art Deco",
+      title: "Art Deco",
+    },
+    {
+      id: "20",
+      imageUrl: "https://i.ibb.co/1fvnxL3L/19.png",
+      alt: "Marble Luxury",
+      title: "Marble Luxury",
+    },
+  ];
 
   return (
     <CardContext.Provider value={{ selectedCard, setSelectedCard, cards }}>
       {children}
     </CardContext.Provider>
-  )
+  );
 }
 
 /* =========================
@@ -80,81 +188,106 @@ function CardProvider({ children }: { children: React.ReactNode }) {
    ========================= */
 
 function StarfieldBackground() {
-  const mountRef = useRef<HTMLDivElement>(null)
+  const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!mountRef.current) return
+    if (!mountRef.current) return;
 
     // Check WebGL availability BEFORE creating Three.js renderer
     // to avoid THREE's internal console.error on sandboxed/no-GPU environments
-    const testCanvas = document.createElement("canvas")
-    const gl = testCanvas.getContext("webgl") || testCanvas.getContext("experimental-webgl")
+    const testCanvas = document.createElement("canvas");
+    const gl =
+      testCanvas.getContext("webgl") ||
+      testCanvas.getContext("experimental-webgl");
     if (!gl) {
-      console.warn("WebGL not available — skipping 3D starfield, using CSS fallback")
-      return
+      console.warn(
+        "WebGL not available — skipping 3D starfield, using CSS fallback",
+      );
+      return;
     }
 
-    let renderer: THREE.WebGLRenderer | null = null
-    let animationId = 0
-    let starsGeometry: THREE.BufferGeometry | null = null
-    let starsMaterial: THREE.PointsMaterial | null = null
+    let renderer: THREE.WebGLRenderer | null = null;
+    let animationId = 0;
+    let starsGeometry: THREE.BufferGeometry | null = null;
+    let starsMaterial: THREE.PointsMaterial | null = null;
 
     try {
-      const scene = new THREE.Scene()
-      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000)
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
-      renderer.setSize(window.innerWidth, window.innerHeight)
-      renderer.setPixelRatio(window.devicePixelRatio)
-      renderer.setClearColor(0x000000, 1)
-      mountRef.current.appendChild(renderer.domElement)
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        2000,
+      );
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setClearColor(0x000000, 1);
+      mountRef.current.appendChild(renderer.domElement);
 
-      starsGeometry = new THREE.BufferGeometry()
-      const starsCount = 10000
-      const positions = new Float32Array(starsCount * 3)
+      starsGeometry = new THREE.BufferGeometry();
+      const starsCount = 10000;
+      const positions = new Float32Array(starsCount * 3);
       for (let i = 0; i < starsCount; i++) {
-        positions[i * 3] = (Math.random() - 0.5) * 2000
-        positions[i * 3 + 1] = (Math.random() - 0.5) * 2000
-        positions[i * 3 + 2] = (Math.random() - 0.5) * 2000
+        positions[i * 3] = (Math.random() - 0.5) * 2000;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 2000;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 2000;
       }
-      starsGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3))
-      starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.7, sizeAttenuation: true })
-      const stars = new THREE.Points(starsGeometry, starsMaterial)
-      scene.add(stars)
+      starsGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(positions, 3),
+      );
+      starsMaterial = new THREE.PointsMaterial({
+        color: 0xffffff,
+        size: 0.7,
+        sizeAttenuation: true,
+      });
+      const stars = new THREE.Points(starsGeometry, starsMaterial);
+      scene.add(stars);
 
-      camera.position.z = 10
+      camera.position.z = 10;
 
       const animate = () => {
-        animationId = requestAnimationFrame(animate)
-        stars.rotation.y += 0.0001
-        stars.rotation.x += 0.00005
-        renderer!.render(scene, camera)
-      }
-      animate()
+        animationId = requestAnimationFrame(animate);
+        stars.rotation.y += 0.0001;
+        stars.rotation.x += 0.00005;
+        renderer!.render(scene, camera);
+      };
+      animate();
 
       const handleResize = () => {
-        camera.aspect = window.innerWidth / window.innerHeight
-        camera.updateProjectionMatrix()
-        renderer!.setSize(window.innerWidth, window.innerHeight)
-      }
-      window.addEventListener("resize", handleResize)
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer!.setSize(window.innerWidth, window.innerHeight);
+      };
+      window.addEventListener("resize", handleResize);
 
       return () => {
-        window.removeEventListener("resize", handleResize)
-        cancelAnimationFrame(animationId)
+        window.removeEventListener("resize", handleResize);
+        cancelAnimationFrame(animationId);
         if (mountRef.current && renderer?.domElement) {
-          mountRef.current.removeChild(renderer.domElement)
+          mountRef.current.removeChild(renderer.domElement);
         }
-        renderer?.dispose()
-        starsGeometry?.dispose()
-        starsMaterial?.dispose()
-      }
+        renderer?.dispose();
+        starsGeometry?.dispose();
+        starsMaterial?.dispose();
+      };
     } catch (e) {
       // WebGL not available — CSS fallback handles the background
-      console.warn("WebGL not available, using CSS fallback:", e)
+      console.warn("WebGL not available, using CSS fallback:", e);
     }
-  }, [])
+  }, []);
 
-  return <div ref={mountRef} className="fixed top-0 left-0 w-full h-full z-0" style={{ background: "radial-gradient(ellipse at center, #0d0d2b 0%, #000000 100%)" }} />
+  return (
+    <div
+      ref={mountRef}
+      className="fixed top-0 left-0 w-full h-full z-0"
+      style={{
+        background:
+          "radial-gradient(ellipse at center, #0d0d2b 0%, #000000 100%)",
+      }}
+    />
+  );
 }
 
 /* =========================
@@ -165,34 +298,41 @@ function FloatingCard({
   card,
   position,
 }: {
-  card: Card
-  position: { x: number; y: number; z: number; rotationX: number; rotationY: number; rotationZ: number }
+  card: Card;
+  position: {
+    x: number;
+    y: number;
+    z: number;
+    rotationX: number;
+    rotationY: number;
+    rotationZ: number;
+  };
 }) {
-  const meshRef = useRef<THREE.Mesh>(null)
-  const groupRef = useRef<THREE.Group>(null)
-  const [hovered, setHovered] = useState(false)
-  const { setSelectedCard } = useCard()
+  const meshRef = useRef<THREE.Mesh>(null);
+  const groupRef = useRef<THREE.Group>(null);
+  const [hovered, setHovered] = useState(false);
+  const { setSelectedCard } = useCard();
 
   useFrame(({ camera }) => {
     if (groupRef.current) {
-      groupRef.current.lookAt(camera.position)
+      groupRef.current.lookAt(camera.position);
     }
-  })
+  });
 
   const handleClick = (e: any) => {
-    e.stopPropagation()
-    setSelectedCard(card)
-  }
+    e.stopPropagation();
+    setSelectedCard(card);
+  };
   const handlePointerOver = (e: any) => {
-    e.stopPropagation()
-    setHovered(true)
-    document.body.style.cursor = "pointer"
-  }
+    e.stopPropagation();
+    setHovered(true);
+    document.body.style.cursor = "pointer";
+  };
   const handlePointerOut = (e: any) => {
-    e.stopPropagation()
-    setHovered(false)
-    document.body.style.cursor = "auto"
-  }
+    e.stopPropagation();
+    setHovered(false);
+    document.body.style.cursor = "auto";
+  };
 
   return (
     <group ref={groupRef} position={[position.x, position.y, position.z]}>
@@ -222,7 +362,9 @@ function FloatingCard({
             boxShadow: hovered
               ? "0 25px 50px rgba(49, 184, 198, 0.5), 0 0 30px rgba(49, 184, 198, 0.3)"
               : "0 15px 30px rgba(0, 0, 0, 0.6)",
-            border: hovered ? "2px solid rgba(49, 184, 198, 0.5)" : "1px solid rgba(255, 255, 255, 0.1)",
+            border: hovered
+              ? "2px solid rgba(49, 184, 198, 0.5)"
+              : "1px solid rgba(255, 255, 255, 0.1)",
           }}
         >
           <img
@@ -233,12 +375,14 @@ function FloatingCard({
             draggable={false}
           />
           <div className="mt-1 text-center">
-            <p className="text-white text-xs font-medium truncate">{card.title}</p>
+            <p className="text-white text-xs font-medium truncate">
+              {card.title}
+            </p>
           </div>
         </div>
       </Html>
     </group>
-  )
+  );
 }
 
 /* =========================
@@ -246,42 +390,49 @@ function FloatingCard({
    ========================= */
 
 function CardModal() {
-  const { selectedCard, setSelectedCard } = useCard()
-  const [isFavorited, setIsFavorited] = useState(false)
-  const cardRef = useRef<HTMLDivElement>(null)
+  const { selectedCard, setSelectedCard } = useCard();
+  const [isFavorited, setIsFavorited] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
 
-  if (!selectedCard) return null
+  if (!selectedCard) return null;
 
   const handleMouseMove: React.MouseEventHandler<HTMLDivElement> = (e) => {
-    if (!cardRef.current) return
-    const rect = cardRef.current.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-    const centerX = rect.width / 2
-    const centerY = rect.height / 2
-    const rotateX = (y - centerY) / 15
-    const rotateY = (centerX - x) / 15
-    cardRef.current.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`
-  }
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = (y - centerY) / 15;
+    const rotateY = (centerX - x) / 15;
+    cardRef.current.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  };
 
-  const handleMouseEnter = () => {}
+  const handleMouseEnter = () => {};
   const handleMouseLeave = () => {
     if (cardRef.current) {
-      cardRef.current.style.transition = "transform 0.5s ease-out"
-      cardRef.current.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg)"
+      cardRef.current.style.transition = "transform 0.5s ease-out";
+      cardRef.current.style.transform =
+        "perspective(1000px) rotateX(0deg) rotateY(0deg)";
     }
-  }
+  };
 
-  const toggleFavorite = () => setIsFavorited((v) => !v)
-  const handleClose = () => setSelectedCard(null)
+  const toggleFavorite = () => setIsFavorited((v) => !v);
+  const handleClose = () => setSelectedCard(null);
   const handleBackdropClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
-    if (e.target === e.currentTarget) handleClose()
-  }
+    if (e.target === e.currentTarget) handleClose();
+  };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={handleBackdropClick}>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+      onClick={handleBackdropClick}
+    >
       <div className="relative max-w-md w-full mx-4">
-        <button onClick={handleClose} className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors z-10">
+        <button
+          onClick={handleClose}
+          className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors z-10"
+        >
           <X className="w-8 h-8" />
         </button>
 
@@ -298,17 +449,25 @@ function CardModal() {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            <div className="relative w-full mb-4" style={{ aspectRatio: "3 / 4" }}>
+            <div
+              className="relative w-full mb-4"
+              style={{ aspectRatio: "3 / 4" }}
+            >
               <img
                 loading="lazy"
                 className="absolute inset-0 h-full w-full rounded-[16px] bg-[#000000] object-cover"
                 alt={selectedCard.alt}
                 src={selectedCard.imageUrl || "/placeholder.svg"}
-                style={{ boxShadow: "rgba(0, 0, 0, 0.05) 0px 5px 6px 0px", opacity: 1 }}
+                style={{
+                  boxShadow: "rgba(0, 0, 0, 0.05) 0px 5px 6px 0px",
+                  opacity: 1,
+                }}
               />
             </div>
 
-            <h3 className="text-white text-lg font-semibold mb-4 text-center">{selectedCard.title}</h3>
+            <h3 className="text-white text-lg font-semibold mb-4 text-center">
+              {selectedCard.title}
+            </h3>
 
             <div className="flex gap-2">
               <button
@@ -327,14 +486,18 @@ function CardModal() {
                 className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-black outline-none transition duration-300 ease-out hover:opacity-80 active:scale-[0.97]"
                 style={{ backgroundColor: "#31b8c6" }}
               >
-                <Heart className="h-4 w-4" strokeWidth={1.8} fill={isFavorited ? "currentColor" : "none"} />
+                <Heart
+                  className="h-4 w-4"
+                  strokeWidth={1.8}
+                  fill={isFavorited ? "currentColor" : "none"}
+                />
               </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 /* =========================
@@ -342,27 +505,27 @@ function CardModal() {
    ========================= */
 
 function CardGalaxy() {
-  const { cards } = useCard()
+  const { cards } = useCard();
 
   const cardPositions = useMemo(() => {
     const positions: {
-      x: number
-      y: number
-      z: number
-      rotationX: number
-      rotationY: number
-      rotationZ: number
-    }[] = []
-    const numCards = cards.length
-    const goldenRatio = (1 + Math.sqrt(5)) / 2
+      x: number;
+      y: number;
+      z: number;
+      rotationX: number;
+      rotationY: number;
+      rotationZ: number;
+    }[] = [];
+    const numCards = cards.length;
+    const goldenRatio = (1 + Math.sqrt(5)) / 2;
 
     for (let i = 0; i < numCards; i++) {
-      const y = 1 - (i / (numCards - 1)) * 2
-      const radiusAtY = Math.sqrt(1 - y * y)
-      const theta = (2 * Math.PI * i) / goldenRatio
-      const x = Math.cos(theta) * radiusAtY
-      const z = Math.sin(theta) * radiusAtY
-      const layerRadius = 12 + (i % 3) * 4
+      const y = 1 - (i / (numCards - 1)) * 2;
+      const radiusAtY = Math.sqrt(1 - y * y);
+      const theta = (2 * Math.PI * i) / goldenRatio;
+      const x = Math.cos(theta) * radiusAtY;
+      const z = Math.sin(theta) * radiusAtY;
+      const layerRadius = 12 + (i % 3) * 4;
 
       positions.push({
         x: x * layerRadius,
@@ -371,31 +534,51 @@ function CardGalaxy() {
         rotationX: Math.atan2(z, Math.sqrt(x * x + y * y)),
         rotationY: Math.atan2(x, z),
         rotationZ: (Math.random() - 0.5) * 0.2,
-      })
+      });
     }
-    return positions
-  }, [cards.length])
+    return positions;
+  }, [cards.length]);
 
   return (
     <>
       <Sphere args={[2, 32, 32]} position={[0, 0, 0]}>
-        <meshStandardMaterial color="#1a1a2e" transparent opacity={0.15} wireframe />
+        <meshStandardMaterial
+          color="#1a1a2e"
+          transparent
+          opacity={0.15}
+          wireframe
+        />
       </Sphere>
       <Sphere args={[12, 32, 32]} position={[0, 0, 0]}>
-        <meshStandardMaterial color="#31b8c6" transparent opacity={0.05} wireframe />
+        <meshStandardMaterial
+          color="#31b8c6"
+          transparent
+          opacity={0.05}
+          wireframe
+        />
       </Sphere>
       <Sphere args={[16, 32, 32]} position={[0, 0, 0]}>
-        <meshStandardMaterial color="#31b8c6" transparent opacity={0.03} wireframe />
+        <meshStandardMaterial
+          color="#31b8c6"
+          transparent
+          opacity={0.03}
+          wireframe
+        />
       </Sphere>
       <Sphere args={[20, 32, 32]} position={[0, 0, 0]}>
-        <meshStandardMaterial color="#31b8c6" transparent opacity={0.02} wireframe />
+        <meshStandardMaterial
+          color="#31b8c6"
+          transparent
+          opacity={0.02}
+          wireframe
+        />
       </Sphere>
 
       {cards.map((card, i) => (
         <FloatingCard key={card.id} card={card} position={cardPositions[i]} />
       ))}
     </>
-  )
+  );
 }
 
 /* =========================
@@ -407,15 +590,15 @@ class CanvasErrorBoundary extends React.Component<
   { hasError: boolean }
 > {
   constructor(props: { children: React.ReactNode; fallback: React.ReactNode }) {
-    super(props)
-    this.state = { hasError: false }
+    super(props);
+    this.state = { hasError: false };
   }
   static getDerivedStateFromError() {
-    return { hasError: true }
+    return { hasError: true };
   }
   render() {
-    if (this.state.hasError) return this.props.fallback
-    return this.props.children
+    if (this.state.hasError) return this.props.fallback;
+    return this.props.children;
   }
 }
 
@@ -424,19 +607,21 @@ class CanvasErrorBoundary extends React.Component<
    ========================= */
 
 export default function StellarCardGallerySingle() {
-  const [mounted, setMounted] = useState(false)
-  const [webglAvailable, setWebglAvailable] = useState(false)
+  const [mounted, setMounted] = useState(false);
+  const [webglAvailable, setWebglAvailable] = useState(false);
 
   useEffect(() => {
     // Detect WebGL support once on mount before rendering anything Three.js related
-    const testCanvas = document.createElement("canvas")
-    const gl = testCanvas.getContext("webgl") || testCanvas.getContext("experimental-webgl")
-    setWebglAvailable(!!gl)
-    setMounted(true)
-  }, [])
+    const testCanvas = document.createElement("canvas");
+    const gl =
+      testCanvas.getContext("webgl") ||
+      testCanvas.getContext("experimental-webgl");
+    setWebglAvailable(!!gl);
+    setMounted(true);
+  }, []);
 
   if (!mounted) {
-    return <div className="w-full h-screen bg-black" />
+    return <div className="w-full h-screen bg-black" />;
   }
 
   return (
@@ -448,7 +633,9 @@ export default function StellarCardGallerySingle() {
           <CanvasErrorBoundary
             fallback={
               <div className="absolute inset-0 z-10 flex items-center justify-center">
-                <p className="text-white/50 text-sm">3D view not available in this browser</p>
+                <p className="text-white/50 text-sm">
+                  3D view not available in this browser
+                </p>
               </div>
             }
           >
@@ -456,7 +643,7 @@ export default function StellarCardGallerySingle() {
               camera={{ position: [0, 0, 15], fov: 60 }}
               className="absolute inset-0 z-10"
               onCreated={({ gl }) => {
-                gl.domElement.style.pointerEvents = "auto"
+                gl.domElement.style.pointerEvents = "auto";
               }}
             >
               <Suspense fallback={null}>
@@ -482,7 +669,9 @@ export default function StellarCardGallerySingle() {
         ) : (
           <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none">
             <div className="text-center">
-              <p className="text-white/40 text-sm mt-2">Open in Chrome or Firefox for the full 3D experience</p>
+              <p className="text-white/40 text-sm mt-2">
+                Open in Chrome or Firefox for the full 3D experience
+              </p>
             </div>
           </div>
         )}
@@ -491,9 +680,11 @@ export default function StellarCardGallerySingle() {
 
         <div className="absolute top-4 left-4 z-20 text-white pointer-events-none">
           <h1 className="text-2xl font-bold mb-2">3D Stellar Card Gallery</h1>
-          <p className="text-sm opacity-70">Drag to look around • Scroll to zoom • Click cards to view details</p>
+          <p className="text-sm opacity-70">
+            Drag to look around • Scroll to zoom • Click cards to view details
+          </p>
         </div>
       </div>
     </CardProvider>
-  )
+  );
 }

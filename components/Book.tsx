@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 import { PageFlip } from "page-flip";
 import Image from "next/image";
 
-
 export default function Book() {
   const bookRef = useRef<HTMLDivElement>(null);
 
@@ -545,8 +544,7 @@ export default function Book() {
           className="object-contain scale-58  rotate-0 z-50 -translate-x-6 -translate-y-40 "
         />
 
-
-          <Image
+        <Image
           src="/ref/girl9.jpg"
           alt="Disk"
           fill
@@ -554,8 +552,8 @@ export default function Book() {
           draggable={false}
           className="object-contain scale-28  -rotate-4 z-50 -translate-x-18 -translate-y-16 "
         />
-        
-          <Image
+
+        <Image
           src="/ref/girl8.jpg"
           alt="Disk"
           fill
@@ -592,7 +590,7 @@ export default function Book() {
         {/* <div className="flex h-full items-center justify-center text-5xl font-bold">
           Back Cover
         </div> */}
-          <Image
+        <Image
           // src="/frontr.png"
           src="/pages/back.png"
           alt="Front Cover"

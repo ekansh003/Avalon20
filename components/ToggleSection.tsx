@@ -166,8 +166,9 @@ export const ToggleSection = () => {
                     lineHeight: 1.8,
                   }}
                 >
-                  A floating room made of memories is orbiting in front of you. Step inside
-                  the cube and unlock the hidden birthday dimension 💜
+                  A floating room made of memories is orbiting in front of you.
+                  Step inside the cube and unlock the hidden birthday dimension
+                  💜
                 </p>
               </div>
 
@@ -260,8 +261,11 @@ export const ToggleSection = () => {
                   marginInline: "auto",
                 }}
               >
-                This room was built from moments that matter. Every face of the cube holds a little piece of joy, laughter, and love.
-                May your life keep unfolding into new adventures, brighter dreams, and memories even more magical than the ones already captured here. 💜🎈
+                This room was built from moments that matter. Every face of the
+                cube holds a little piece of joy, laughter, and love. May your
+                life keep unfolding into new adventures, brighter dreams, and
+                memories even more magical than the ones already captured here.
+                💜🎈
               </p>
 
               {/* Floating gallery */}
@@ -279,7 +283,11 @@ export const ToggleSection = () => {
                     initial={{ opacity: 0, y: 24, rotate: -4 }}
                     animate={{ opacity: 1, y: 0, rotate: 0 }}
                     transition={{ duration: 0.45, delay: i * 0.08 }}
-                    whileHover={{ y: -14, rotate: i % 2 === 0 ? -3 : 3, scale: 1.03 }}
+                    whileHover={{
+                      y: -14,
+                      rotate: i % 2 === 0 ? -3 : 3,
+                      scale: 1.03,
+                    }}
                     style={{
                       borderRadius: 22,
                       overflow: "hidden",
