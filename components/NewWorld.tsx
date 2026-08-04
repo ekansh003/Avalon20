@@ -89,7 +89,6 @@ function CardProvider({ children }: { children: React.ReactNode }) {
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
 
   const cards: Card[] = [
-    // { id: "1", imageUrl: "/ref/💜.jpg", alt: "Cutie", title: "Cutie" },
     { id: "2", imageUrl: "/ref/girl.jpg", alt: "Baddie", title: "Baddie" },
     { id: "3", imageUrl: "/ref/girl2.jpg", alt: "Angel", title: "Angel" },
     {

@@ -5,7 +5,7 @@ import {
 window.__balloonsJS = { balloons, textBalloons };
 
 // ---- EDIT THIS: real birth date/time ----
-const BIRTH_DATE = new Date(2007, 9, 29, 13, 20, 0);
+const BIRTH_DATE = new Date(2003, 4, 2, 13, 20, 0);
 
 function computeParts() {
   const now = new Date();
@@ -53,7 +53,6 @@ document.getElementById("liveReadout").textContent = readout(initial);
 const triggerBtn = document.getElementById("triggerBtn");
 const watermarkEl = document.getElementById("watermark");
 const emberLayer = document.getElementById("emberLayer");
-const pressPrompt = document.getElementById("pressPrompt");
 const revealFlash = document.getElementById("revealFlash");
 let burning = false;
 let balloonsJSFired = false;
@@ -65,8 +64,8 @@ function fireBalloonsJS() {
     const { balloons, textBalloons } = window.__balloonsJS;
     balloons();
     textBalloons([
-      { text: "Happy Birthday", fontSize: 120, color: "#ffffff" },
-      { text: "🎉🎂🎈", fontSize: 120, color: "#ffffff" },
+      { text: "Happy B'day babu!", fontSize: 120, color: "#ffffff" },
+      { text: "🎂💖✨", fontSize: 120, color: "#ffffff" },
     ]);
   }
 }
@@ -398,11 +397,7 @@ function burnAndRelease() {
       canvas.style.transform = "translate(0,0)";
       watermarkEl.textContent = String(AGE).padStart(2, "0");
       fireBalloonsJS();
-      gsap.to(pressPrompt, {
-        opacity: 0,
-        duration: 0.5,
-        ease: "power2.out",
-      });
+
       gsap.fromTo(
         revealFlash,
         { scale: 0.2, opacity: 0.95 },
@@ -503,7 +498,6 @@ tl.to({}, { duration: 0.35 }) // brief hold on the final number once every colum
     { opacity: 0, y: 6 },
     { opacity: 1, y: 0, duration: 0.6, stagger: 0.1 },
   )
-  .to("#pressPrompt", { opacity: 1, duration: 0.7, ease: "power2.out" }, "<0.2")
   .set("#pressPrompt", { pointerEvents: "auto" });
 
 // ---------------- live readout tick ----------------

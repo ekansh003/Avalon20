@@ -1,12 +1,11 @@
 "use client";
 
-import React from "react";
 import MarqueeAlongSvgPath from "../LineCmp";
 
 const path =
   "M1 209.434C58.5872 255.935 387.926 325.938 482.583 209.434C600.905 63.8051 525.516 -43.2211 427.332 19.9613C329.149 83.1436 352.902 242.723 515.041 267.302C644.752 286.966 943.56 181.94 995 156.5";
 
-// Local photos from /public/ref — resolve to /ref/*.jpg at runtime.
+// Images served from public/ref
 const imgs = [
   { src: "/ref/heart.jpg" },
   { src: "/ref/girl.jpg" },
@@ -41,8 +40,8 @@ export const HeroSection = () => {
 
       {/* Top row: quiet date stamp, nothing else competing for attention */}
       <div className="hero-mono flex items-center justify-between px-8 pt-8 text-[11px] uppercase tracking-[0.25em] text-[#8A8A80] sm:px-14">
-        <span>Aug 02</span>
-        {/* <span>One more lap</span> */}
+        <span>Sep 29</span>
+        <span>level 20</span>
       </div>
 
       {/* Headline — centered in the upper half, generous but not stretched to fill the screen */}
@@ -52,7 +51,7 @@ export const HeroSection = () => {
           <br />
           <span className="font-bold">Birthday</span>
           <br />
-          <span className="font-bold text-amber-500">Sweety</span>
+          <span className="font-bold text-amber-500">cheesecake🧀</span>
         </h1>
         <div className="mt-6 h-px w-16 bg-[#9C7A3F]" />
         <p className="hero-body mt-6 max-w-sm text-base leading-relaxed text-[#4A4A42]">
@@ -100,7 +99,7 @@ export const HeroSection = () => {
       <div className="mt-auto flex items-center justify-between px-8 pb-8 sm:px-14">
         <div className="h-px flex-1 bg-[#14140F]/10" />
         <span className="hero-mono px-4 text-[10px] uppercase tracking-[0.25em] text-[#8A8A80]">
-          Made for you
+          Made with ❤️ by broo
         </span>
       </div>
     </section>

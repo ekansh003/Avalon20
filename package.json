@@ -11,8 +11,6 @@
   "dependencies": {
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.7.0",
-    "@splinetool/react-spline": "^4.1.0",
-    "@splinetool/runtime": "^1.12.98",
     "balloons-js": "^0.0.3",
     "canvas-confetti": "^1.9.4",
     "clsx": "^2.1.1",

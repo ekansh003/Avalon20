@@ -3,41 +3,30 @@
 import { useEffect } from "react";
 import { balloons, textBalloons } from "balloons-js";
 
-export default function BalloonsEffect() {
-  useEffect(() => {
-    // Regular balloons start immediately
-    balloons();
-
-    // "Happy" balloons start immediately
+const launchText = (text: string, color: string, delay = 0) =>
+  setTimeout(() => {
     textBalloons([
       {
-        text: "Happy",
+        text,
         fontSize: 120,
-        color: "#03ff31ff",
+        color,
       },
     ]);
+  }, delay);
 
-    // "Birthday" balloons delayed by 2500ms (2.5 seconds)
-    setTimeout(() => {
-      textBalloons([
-        {
-          text: "Birthday",
-          fontSize: 120,
-          color: "#d41b1bff",
-        },
-      ]);
-    }, 2500);
+export default function BalloonsEffect() {
+  useEffect(() => {
+    balloons();
 
-    // Emoji balloons delayed by 5000ms (5 seconds)
-    setTimeout(() => {
-      textBalloons([
-        {
-          text: "💩🔥😈",
-          fontSize: 120,
-          color: "#000000",
-        },
-      ]);
-    }, 5000);
+    const happy = launchText("Happy", "#9C7A3F");
+    const birthday = launchText("Birthday", "#9C7A3F", 2500);
+    const emoji = launchText("🎂💖✨", "#000000", 5000);
+
+    return () => {
+      clearTimeout(happy);
+      clearTimeout(birthday);
+      clearTimeout(emoji);
+    };
   }, []);
 
   return null;

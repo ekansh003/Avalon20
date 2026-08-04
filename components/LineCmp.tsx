@@ -147,10 +147,6 @@ const MarqueeAlongSvgPath = ({
   const marqueeContainerRef = useRef<HTMLDivElement>(null);
   const baseOffset = useMotionValue(0);
 
-  const pathRef = useRef<SVGPathElement>(null);
-
-  const itemRefs = useRef<Map<string, HTMLDivElement>>(new Map());
-
   // Responsive scaling using direct DOM manipulation (no re-renders)
   useEffect(() => {
     if (!responsive) return;
@@ -408,7 +404,6 @@ const MarqueeAlongSvgPath = ({
             d={path}
             stroke={showPath ? "currentColor" : "none"}
             fill="none"
-            ref={pathRef}
           />
         </svg>
 
@@ -450,9 +445,6 @@ const MarqueeAlongSvgPath = ({
           return (
             <motion.div
               key={key}
-              ref={(el) => {
-                if (el) itemRefs.current.set(key, el);
-              }}
               className={cn(
                 "absolute top-0 left-0",
                 draggable && grabCursor && "cursor-grab",

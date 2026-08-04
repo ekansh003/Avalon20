@@ -29,7 +29,7 @@ export const DraggableCardBody = ({
     bottom: 0,
   });
 
-  // physics biatch
+  // Card interaction physics
   const velocityX = useVelocity(mouseX);
   const velocityY = useVelocity(mouseY);
 

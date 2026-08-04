@@ -21,7 +21,6 @@ export default function Book() {
       startPage: 0,
     });
 
-    // const pages = bookRef.current.querySelectorAll(".book-page");
     pageFlip.loadFromHTML(bookRef.current.querySelectorAll(".book-page"));
 
     return () => {
@@ -38,7 +37,6 @@ export default function Book() {
         style={{ width: 200, height: 700 }}
       >
         <Image
-          // src="/frontr.png"
           src="/pages/front.png"
           alt="Front Cover"
           fill
@@ -55,10 +53,6 @@ export default function Book() {
         className="  book-page bg-amber-50 text-black"
         style={{ width: 600, height: 500 }}
       >
-        {/* <div className="flex h-full items-center justify-center text-4xl">
-          Page 1
-        </div> */}
-
         <Image
           src="/pages/left.jpg"
           alt="Front Cover"
@@ -76,15 +70,6 @@ export default function Book() {
           draggable={false}
           className="object-contain  -rotate-12  -translate-x-34 -translate-y-33 scale-35   "
         ></Image>
-
-        {/* <Image
-      src="/elements/stamp.png"
-        alt="Front Cover"
-    fill
-    priority
-    draggable={false}
-    className="object-contain  -rotate-12  -translate-x-20 translate-y-30 scale-40   "
-        ></Image>  */}
 
         <Image
           src="/elements/side3.png"
@@ -236,10 +221,6 @@ export default function Book() {
         className="relative overflow-hidden book-page bg-amber-50 text-black"
         style={{ width: 600, height: 500 }}
       >
-        {/* <div className="flex h-full items-center justify-center text-4xl">
-          Page 3
-        </div> */}
-
         <Image
           src="/pages/left.jpg"
           alt="Front Cover"
@@ -587,11 +568,7 @@ export default function Book() {
         data-density="hard"
         style={{ width: 600, height: 500 }}
       >
-        {/* <div className="flex h-full items-center justify-center text-5xl font-bold">
-          Back Cover
-        </div> */}
         <Image
-          // src="/frontr.png"
           src="/pages/back.png"
           alt="Front Cover"
           fill
