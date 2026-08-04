@@ -1,7 +1,7 @@
-import { HeroSection } from "@/components/sections/HeroSection";
-import LoveGallery from "@/components/LoveGallery";
-import StellarCardGallerySingle from "@/components/NewWorld";
-import Book from "@/components/Book";
+import { Hero } from "@/components/sections/Hero";
+import PhotoWall from "@/components/sections/PhotoWall";
+import Galaxy from "@/components/sections/Galaxy";
+import Book from "@/components/sections/ScrapBook";
 
 export default function Home() {
   return (
@@ -21,11 +21,11 @@ export default function Home() {
       </section>
 
       <section className="h-screen w-full snap-start snap-always shrink-0 overflow-visible relative z-10">
-        <HeroSection />
+        <Hero />
       </section>
 
       <section className="h-screen w-full snap-start snap-always shrink-0 overflow-visible relative z-10">
-        <LoveGallery />
+        <PhotoWall />
       </section>
 
       <section className="h-screen w-full snap-start snap-always shrink-0 overflow-visible relative z-10">
@@ -35,7 +35,7 @@ export default function Home() {
       </section>
 
       <section className="h-screen w-full snap-start overflow-y-scroll snap-always shrink-0 relative">
-        <StellarCardGallerySingle />
+        <Galaxy />
       </section>
     </div>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { Caveat } from "next/font/google";
-import { DraggableCardBody, DraggableCardContainer } from "./DraggableCards";
+import { DraggableCardBody, DraggableCardContainer } from "../effects/DraggableCards";
 
 const handwriting = Caveat({
   subsets: ["latin"],

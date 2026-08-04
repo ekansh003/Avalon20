@@ -5,7 +5,7 @@ import {
 window.__balloonsJS = { balloons, textBalloons };
 
 // ---- EDIT THIS: real birth date/time ----
-const BIRTH_DATE = new Date(2003, 4, 2, 13, 20, 0);
+const BIRTH_DATE = new Date(2007, 8, 29, 13, 20, 0);
 
 function computeParts() {
   const now = new Date();

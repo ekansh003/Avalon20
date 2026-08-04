@@ -1,6 +1,6 @@
 "use client";
 
-import MarqueeAlongSvgPath from "../LineCmp";
+import PhotoReel from "./PhotoReel";
 
 const path =
   "M1 209.434C58.5872 255.935 387.926 325.938 482.583 209.434C600.905 63.8051 525.516 -43.2211 427.332 19.9613C329.149 83.1436 352.902 242.723 515.041 267.302C644.752 286.966 943.56 181.94 995 156.5";
@@ -21,7 +21,7 @@ const imgs = [
   { src: "/ref/girl11.jpg" },
 ];
 
-export const HeroSection = () => {
+export const Hero = () => {
   return (
     <section className="relative overflow-hidden flex min-h-screen w-full flex-col overflow-x-hidden bg-[#FAFAF7]">
       <style jsx global>{`
@@ -61,7 +61,7 @@ export const HeroSection = () => {
 
       {/* The trail — moved up under the headline, full-bleed edge to edge, tilted */}
       <div className=" absolute top-50 left-1/2 mt-0 w-screen -rotate-10 -translate-x-1/2 ">
-        <MarqueeAlongSvgPath
+        <PhotoReel
           path={path}
           viewBox="0 0 996 330"
           width="100%"
@@ -92,7 +92,7 @@ export const HeroSection = () => {
               />
             </div>
           ))}
-        </MarqueeAlongSvgPath>
+        </PhotoReel>
       </div>
 
       {/* Remaining space stays quiet on purpose — a hairline and a small mark, nothing more */}
