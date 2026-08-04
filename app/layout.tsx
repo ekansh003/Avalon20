@@ -41,14 +41,14 @@ export const metadata: Metadata = {
   ],
 
   // Replace this after deployment
-  metadataBase: new URL("https://your-domain.com"),
+  metadataBase: new URL("https://avalon20.vercel.app/"),
 
   openGraph: {
     title: "Avalon20",
     description:
       "A handcrafted birthday experience filled with memories, surprises, and love.",
 
-    url: "https://your-domain.com",
+    url: "https://avalon20.vercel.app/",
 
     siteName: "Avalon20",
 
