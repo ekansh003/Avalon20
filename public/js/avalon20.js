@@ -1,10 +1,3 @@
-import {
-  balloons,
-  textBalloons,
-} from "https://cdn.jsdelivr.net/npm/balloons-js/+esm";
-window.__balloonsJS = { balloons, textBalloons };
-
-// ---- EDIT THIS: real birth date/time ----
 const BIRTH_DATE = new Date(2007, 8, 29, 13, 20, 0);
 
 function computeParts() {
@@ -36,18 +29,14 @@ document.getElementById("watermark").textContent = String(DISPLAY_AGE).padStart(
   "0",
 );
 
-// declared here (not further down) so the very first readout() call below
-// can safely reference
 let revealed = false;
 
 function readout(p) {
-  // before the burn reveal, the watermark intentionally shows one year
-  // less (DISPLAY_AGE) as part of the reveal effect - the ticker must
-  // match that number, or it looks like the clock is wrong
   const shownYears = revealed ? p.years : DISPLAY_AGE;
   return `${shownYears}y · ${p.days}d · ${String(p.hours).padStart(2, "0")}:${String(p.minutes).padStart(2, "0")}:${String(p.seconds).padStart(2, "0")}`;
 }
-document.getElementById("liveReadout").textContent = readout(initial);
+const liveReadout = document.getElementById("liveReadout");
+liveReadout.textContent = readout(initial);
 
 // ---------------- press-to-release trigger ----------------
 const triggerBtn = document.getElementById("triggerBtn");
@@ -55,20 +44,6 @@ const watermarkEl = document.getElementById("watermark");
 const emberLayer = document.getElementById("emberLayer");
 const revealFlash = document.getElementById("revealFlash");
 let burning = false;
-let balloonsJSFired = false;
-
-function fireBalloonsJS() {
-  if (balloonsJSFired) return;
-  balloonsJSFired = true;
-  if (window.__balloonsJS) {
-    const { balloons, textBalloons } = window.__balloonsJS;
-    balloons();
-    textBalloons([
-      { text: "Happy B'day babu!", fontSize: 120, color: "#ffffff" },
-      { text: "🎂💖✨", fontSize: 120, color: "#ffffff" },
-    ]);
-  }
-}
 
 function spawnEmber(x, y, intensity) {
   const e = document.createElement("div");
@@ -394,22 +369,55 @@ function burnAndRelease() {
   )
     .call(() => {
       revealed = true;
+
       canvas.style.transform = "translate(0,0)";
+
+      // Reveal the new/current age in bright gold
       watermarkEl.textContent = String(AGE).padStart(2, "0");
-      fireBalloonsJS();
+
+      gsap.to(watermarkEl, {
+        color: "#f3cf7a",
+        opacity: 1,
+        duration: 0.45,
+        ease: "power2.out",
+      });
+
+      // Reveal the live age timer only after the burn is finished
+      liveReadout.textContent = readout(computeParts());
+
+      gsap.to(liveReadout, {
+        opacity: 1,
+        duration: 0.7,
+        ease: "power2.out",
+      });
+
+      setTimeout(() => {
+        window.parent.postMessage({ type: "birthday-scroll-next" }, "*");
+      }, 1500);
+
+      gsap.to(pressPrompt, {
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out",
+      });
 
       gsap.fromTo(
         revealFlash,
         { scale: 0.2, opacity: 0.95 },
-        { scale: 6.5, opacity: 0, duration: 1.05, ease: "power2.out" },
+        {
+          scale: 6.5,
+          opacity: 0,
+          duration: 1.05,
+          ease: "power2.out",
+        },
       );
     })
     .set(watermarkEl, {
-      color: "#fff",
-      textShadow: "none",
+      color: "#f3cf7a",
+      textShadow: "0 0 24px rgba(243, 207, 122, 0.18)",
       scale: 1,
       filter: "blur(0px)",
-      opacity: 0.09,
+      opacity: 1,
     })
     .call(() => {
       triggerBtn.style.pointerEvents = "none";
@@ -503,5 +511,5 @@ tl.to({}, { duration: 0.35 }) // brief hold on the final number once every colum
 // ---------------- live readout tick ----------------
 setInterval(() => {
   const p = computeParts();
-  document.getElementById("liveReadout").textContent = readout(p);
+  liveReadout.textContent = readout(p);
 }, 1000);

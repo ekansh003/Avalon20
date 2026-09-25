@@ -7,18 +7,19 @@ const path =
 
 // Images served from public/ref
 const imgs = [
-  { src: "/ref/heart.jpg" },
-  { src: "/ref/girl.jpg" },
-  { src: "/ref/girl2.jpg" },
-  { src: "/ref/girl3.jpg" },
-  { src: "/ref/girl4.jpg" },
-  { src: "/ref/girl5.jpg" },
-  { src: "/ref/girl6.jpg" },
-  { src: "/ref/girl7.jpg" },
-  { src: "/ref/girl8.jpg" },
-  { src: "/ref/girl9.jpg" },
   { src: "/ref/girl10.jpg" },
   { src: "/ref/girl11.jpg" },
+  { src: "/ref/girl12.jpg" },
+  { src: "/ref/girl13.jpg" },
+  { src: "/ref/girl14.jpg" },
+  { src: "/ref/girl15.jpg" },
+  { src: "/ref/girl16.jpg" },
+  { src: "/ref/girl17.jpg" },
+  { src: "/ref/girl18.jpg" },
+  { src: "/ref/girl19.jpg" },
+  { src: "/ref/girl20.jpg" },
+  { src: "/ref/girl21.jpg" },
+  { src: "/ref/girl22.jpg" },
 ];
 
 export const Hero = () => {
@@ -46,14 +47,16 @@ export const Hero = () => {
 
       {/* Headline — centered in the upper half, generous but not stretched to fill the screen */}
       <div className="px-8 pt-16 sm:px-14 sm:pt-20">
-        <h1 className="hero-display text-[15vw] leading-[0.86] tracking-tight text-[#14140F] sm:text-7xl lg:text-8xl">
+        <h1 className="hero-display text-[11vw] leading-[0.86] tracking-tight text-[#14140F] sm:text-6xl lg:text-7xl">
           <span className="font-light">Happy</span>
           <br />
-          <span className="font-bold">Birthday</span>
+          <span className="relative top-2 font-bold">Birthday</span>
           <br />
-          <span className="font-bold text-amber-500">cheesecake🧀</span>
+          <span className="font-semibold text-amber-500">cheesecake🧀</span>
         </h1>
+
         <div className="mt-6 h-px w-16 bg-[#9C7A3F]" />
+
         <p className="hero-body mt-6 max-w-sm text-base leading-relaxed text-[#4A4A42]">
           May this year bring you closer to everything you're chasing.
         </p>

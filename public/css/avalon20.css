@@ -3,185 +3,664 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 html,
 body {
+  width: 100%;
   height: 100%;
 }
+
 body {
-  background: #000;
+  background: #260609;
   color: #fff;
-  font-family: "Space Mono", monospace;
+  font-family: "DM Mono", "Space Mono", monospace;
   min-height: 100vh;
   overflow: hidden;
   position: relative;
 }
 
-/* ---------------- intro counter ---------------- */
+/* =========================================================
+   THEATRE CURTAIN BACKGROUND
+   ========================================================= */
+
+.intro,
+.hero {
+  background:
+    radial-gradient(
+      ellipse at center 35%,
+      rgba(170, 45, 48, 0.34) 0%,
+      rgba(90, 12, 18, 0.18) 34%,
+      rgba(25, 2, 6, 0.72) 100%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      #3a080d 0px,
+      #4e0d13 38px,
+      #6c171d 76px,
+      #4d0b11 116px,
+      #32070c 154px,
+      #4c0c12 194px,
+      #6a151c 232px,
+      #3b080e 270px
+    );
+
+  background-size:
+    100% 100%,
+    540px 100%;
+}
+
+/* subtle fabric-like vertical shading */
+
+.intro::before,
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.42),
+    transparent 13%,
+    rgba(255, 90, 80, 0.04) 24%,
+    transparent 37%,
+    rgba(0, 0, 0, 0.28) 50%,
+    transparent 63%,
+    rgba(255, 90, 80, 0.04) 76%,
+    transparent 88%,
+    rgba(0, 0, 0, 0.48)
+  );
+
+  z-index: 0;
+}
+
+/* dark edges */
+
+.intro::after,
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background: radial-gradient(
+    ellipse at center,
+    transparent 35%,
+    rgba(0, 0, 0, 0.18) 65%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+
+  z-index: 1;
+}
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
 .intro {
   position: fixed;
   inset: 0;
   z-index: 20;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #000;
+
+  overflow: hidden;
 }
+
+.intro-center {
+  position: relative;
+  z-index: 3;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.intro-kicker {
+  margin-bottom: 12px;
+
+  font-family: "DM Mono", monospace;
+  font-size: 13px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+
+  color: #e6b85c;
+  opacity: 0.8;
+}
+
 .intro-num {
   font-family: "Archivo Black", sans-serif;
   font-size: clamp(5rem, 26vw, 16rem);
   line-height: 1;
   letter-spacing: -0.02em;
+
+  color: #f6d27b;
+
+  text-shadow:
+    0 0 20px rgba(230, 184, 92, 0.2),
+    0 4px 30px rgba(0, 0, 0, 0.5);
+
   will-change: transform, opacity, filter;
+
   display: inline-flex;
   font-variant-numeric: tabular-nums;
 }
+
+.intro-label {
+  position: absolute;
+  top: calc(100% + 18px);
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+
+  color: rgba(245, 211, 130, 0.6);
+
+  white-space: nowrap;
+}
+
+/* Odometer */
+
 .od-col {
   position: relative;
   height: 1em;
   overflow: hidden;
   display: inline-block;
 }
+
 .od-strip {
   display: flex;
   flex-direction: column;
   will-change: transform, filter;
 }
+
 .od-digit {
   height: 1em;
   line-height: 1;
   display: block;
   text-align: center;
 }
-.intro-label {
+
+/* =========================================================
+   MARQUEE LIGHTS
+   ========================================================= */
+
+.curtain-light-row {
   position: absolute;
-  bottom: 8vh;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #666;
+  top: 25px;
+  left: 0;
+  width: 100%;
+
+  display: flex;
+  justify-content: space-around;
+
+  padding: 0 20px;
+
+  z-index: 3;
 }
 
-/* ---------------- hero ---------------- */
+.curtain-light-row span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+
+  background: #f3c65f;
+
+  box-shadow:
+    0 0 5px rgba(255, 204, 95, 0.95),
+    0 0 16px rgba(255, 174, 45, 0.65);
+
+  animation: marquee-flicker 2.8s ease-in-out infinite;
+}
+
+.curtain-light-row span:nth-child(2n) {
+  animation-delay: 0.35s;
+}
+
+.curtain-light-row span:nth-child(3n) {
+  animation-delay: 0.7s;
+}
+
+@keyframes marquee-flicker {
+  0%,
+  100% {
+    opacity: 0.65;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
 .hero {
   position: relative;
   z-index: 1;
+
   min-height: 100vh;
+  height: 100vh;
+
   opacity: 0;
+
+  overflow: hidden;
 }
 
-.watermark-btn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: none;
-  border: none;
-  padding: 2vh 4vw;
-  cursor: pointer;
-  z-index: 4;
-  -webkit-tap-highlight-color: transparent;
-}
-.watermark-btn:focus-visible {
-  outline: 2px solid #444;
-  outline-offset: 10px;
-  border-radius: 8px;
-}
-.watermark {
-  font-family: "Archivo Black", sans-serif;
-  font-size: clamp(10rem, 46vw, 34rem);
-  line-height: 1;
-  color: #fff;
-  opacity: 0.045;
-  user-select: none;
-  white-space: nowrap;
-  transition: opacity 0.3s ease;
-  display: block;
-}
-.watermark-btn:hover .watermark {
-  opacity: 0.075;
-}
+/* =========================================================
+   TOP MARQUEE
+   ========================================================= */
 
-.press-prompt {
+.marquee-top {
   position: absolute;
-  top: calc(50% + 9vh);
+
+  top: 46px;
   left: 50%;
+
   transform: translateX(-50%);
+
+  z-index: 4;
+
+  width: min(92vw, 1100px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 22px;
+
+  padding: 12px 20px;
+
+  border-top: 1px solid rgba(230, 184, 92, 0.3);
+  border-bottom: 1px solid rgba(230, 184, 92, 0.3);
+
+  color: rgba(238, 195, 102, 0.72);
+
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+.marquee-top span:first-child,
+.marquee-top span:last-child {
+  color: #e6b85c;
+  font-size: 13px;
+}
+
+/* =========================================================
+   HERO CONTENT
+   ========================================================= */
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+
+  min-height: 100vh;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #777;
-  z-index: 5;
-  opacity: 0;
-  pointer-events: none;
-}
-.press-prompt .ring {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 1px solid #555;
-  animation: ring-pulse 1.8s ease-in-out infinite;
-}
-@keyframes ring-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.5;
-  }
-  50% {
-    transform: scale(1.7);
-    opacity: 0;
-  }
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 100px 24px 50px;
 }
 
-.corner {
-  position: absolute;
-  font-size: 11px;
-  letter-spacing: 0.1em;
+.hero-kicker {
+  margin-bottom: 12px;
+
+  color: rgba(240, 201, 119, 0.72);
+
+  font-family: "DM Mono", monospace;
+  font-size: 13px;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: #666;
-  z-index: 5;
 }
-.corner.br {
-  bottom: 22px;
-  right: 24px;
-  text-align: right;
+
+.hero-title {
+  font-family: "Archivo Black", sans-serif;
+
+  font-size: clamp(3.3rem, 8vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+
+  color: #f8e6b3;
+
+  text-shadow:
+    0 3px 0 rgba(91, 39, 16, 0.7),
+    0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+.hero-subtitle {
+  margin-top: 11px;
+
+  color: rgba(244, 216, 153, 0.75);
+
+  font-family: "Playfair Display", serif;
+  font-size: clamp(15px, 1.5vw, 17px);
+  font-style: italic;
+}
+
+/* =========================================================
+   AGE DISPLAY
+   ========================================================= */
+
+.watermark-btn {
+  position: relative;
+
+  margin-top: 42px;
+
+  width: auto;
+  height: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  border: none;
+  padding: 0;
+
+  cursor: pointer;
+
+  z-index: 6;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+.watermark-btn:focus-visible {
+  outline: 2px solid #e6b85c;
+  outline-offset: 12px;
+  border-radius: 8px;
+}
+
+.age-display {
+  position: relative;
+
+  width: auto;
+  height: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  border: none;
+  box-shadow: none;
+
+  padding: 0;
+
+  transition: transform 0.3s ease;
+}
+
+.age-display::before {
+  display: none;
+}
+
+.watermark-btn:hover .age-display {
+  transform: translateY(-3px);
+}
+
+.display-label,
+.display-bottom {
+  display: none;
+}
+
+/* =========================================================
+   BIG AGE NUMBER
+   ========================================================= */
+
+.watermark {
+  position: relative;
+  display: block;
+
+  font-family: "Archivo Black", sans-serif;
+
+  font-size: clamp(7rem, 13vw, 12rem);
+
+  line-height: 0.85;
+
+  letter-spacing: -0.055em;
+
+  color: #f7df9b;
+
+  opacity: 0.94;
+
+  user-select: none;
+  white-space: nowrap;
+
   font-variant-numeric: tabular-nums;
-  color: #999;
+
+  text-shadow:
+    0 0 8px rgba(255, 211, 105, 0.18),
+    0 0 28px rgba(255, 183, 77, 0.1),
+    0 8px 25px rgba(0, 0, 0, 0.35);
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    text-shadow 0.3s ease;
 }
+
+.watermark-btn:hover .watermark {
+  opacity: 1;
+
+  transform: scale(1.02);
+
+  text-shadow:
+    0 0 12px rgba(255, 218, 120, 0.3),
+    0 0 40px rgba(255, 180, 70, 0.18),
+    0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+/* =========================================================
+   AGE LABEL ABOVE NUMBER
+   ========================================================= */
+
+.watermark-btn::before {
+  content: "ONE MORE YEAR OF YOU";
+
+  position: absolute;
+
+  left: 50%;
+  top: -28px;
+
+  transform: translateX(-50%);
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.38em;
+
+  white-space: nowrap;
+
+  color: rgba(239, 194, 89, 0.82);
+}
+
+/* =========================================================
+   PRESS TO REVEAL
+   ========================================================= */
+
+.watermark-btn::after {
+  content: "CLICK WHEN YOU'RE READY";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: -38px;
+
+  transform: translateX(-50%);
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.25em;
+
+  white-space: nowrap;
+
+  color: rgba(239, 194, 89, 0.72);
+
+  transition:
+    color 0.3s ease,
+    letter-spacing 0.3s ease;
+}
+
+.watermark-btn:hover::after {
+  color: rgba(255, 225, 145, 1);
+  letter-spacing: 0.3em;
+}
+
+/* =========================================================
+   CLICK PROMPT
+   ========================================================= */
+
+.press-prompt {
+  margin-top: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  font-family: "DM Mono", monospace;
+
+  font-size: 9px;
+  letter-spacing: 0.25em;
+
+  text-transform: uppercase;
+
+  color: rgba(245, 216, 148, 0.75);
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+.prompt-line {
+  width: 28px;
+  height: 1px;
+
+  background: rgba(230, 184, 92, 0.45);
+}
+
+/* =========================================================
+   BOTTOM TEXT
+   ========================================================= */
+
+.doors-open {
+  margin-top: 35px;
+
+  font-size: 11px;
+
+  letter-spacing: 0.25em;
+
+  text-transform: uppercase;
+
+  color: rgba(238, 195, 102, 0.45);
+}
+
+/* =========================================================
+   LIVE AGE / TIME READOUT
+   ========================================================= */
+
+.live-readout {
+  position: absolute;
+
+  left: 50%;
+  top: calc(50% + 205px);
+
+  transform: translateX(-50%);
+
+  z-index: 5;
+
+  font-family: "Space Mono", monospace;
+
+  font-size: clamp(20px, 2vw, 30px);
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+
+  color: #f3cf7a;
+
+  text-align: center;
+  white-space: nowrap;
+
+  font-variant-numeric: tabular-nums;
+
+  text-shadow:
+    0 0 8px rgba(243, 207, 115, 0.28),
+    0 0 24px rgba(243, 183, 70, 0.14);
+
+  /* Hidden until the age has finished burning */
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   FIRE / REVEAL
+   ========================================================= */
 
 .ember-layer {
   position: fixed;
   inset: 0;
+
   z-index: 15;
+
   pointer-events: none;
 }
+
 .ember {
   position: fixed;
+
   border-radius: 50%;
+
   background: radial-gradient(circle, #ffe2a8 0%, #ff9a3d 55%, transparent 80%);
+
   pointer-events: none;
 }
+
 .smoke {
   position: fixed;
+
   border-radius: 50%;
+
   background: radial-gradient(
     circle,
     rgba(180, 180, 180, 0.55) 0%,
     rgba(90, 90, 90, 0.28) 45%,
     transparent 75%
   );
+
   pointer-events: none;
+
   filter: blur(1px);
 }
+
 .flame-lick {
   position: fixed;
+
   border-radius: 50% 50% 50% 50% / 68% 68% 32% 32%;
+
   background: radial-gradient(
     ellipse at 50% 70%,
     rgba(255, 244, 214, 0.95) 0%,
@@ -189,20 +668,29 @@ body {
     rgba(255, 90, 20, 0.5) 58%,
     transparent 78%
   );
+
   pointer-events: none;
+
   filter: blur(1.5px);
+
   mix-blend-mode: screen;
+
   transform-origin: 50% 100%;
 }
 
 .reveal-flash {
   position: absolute;
+
   top: 50%;
   left: 50%;
+
   width: 40px;
   height: 40px;
+
   transform: translate(-50%, -50%) scale(0);
+
   border-radius: 50%;
+
   background: radial-gradient(
     circle,
     rgba(255, 247, 225, 0.98) 0%,
@@ -210,14 +698,113 @@ body {
     rgba(255, 90, 30, 0.25) 60%,
     transparent 78%
   );
+
   opacity: 0;
+
   pointer-events: none;
+
   z-index: 3;
 }
 
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .marquee-top {
+    top: 40px;
+
+    gap: 10px;
+
+    font-size: 7px;
+    letter-spacing: 0.15em;
+  }
+
+  .hero-content {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.7rem, 13vw, 5rem);
+  }
+
+  .hero-subtitle {
+    font-size: 12px;
+  }
+
+  .watermark-btn {
+    margin-top: 32px;
+  }
+
+  .watermark {
+    font-size: clamp(6rem, 30vw, 9rem);
+  }
+
+  .watermark-btn::before {
+    top: -23px;
+    font-size: 7px;
+  }
+
+  .watermark-btn::after {
+    bottom: -30px;
+    font-size: 7px;
+    letter-spacing: 0.18em;
+  }
+
+  .corner.br {
+    top: calc(50% + 125px);
+
+    font-size: 12px;
+    letter-spacing: 0.06em;
+  }
+
+  .press-prompt {
+    margin-top: 35px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .marquee-top {
+    top: 40px;
+    gap: 10px;
+    font-size: 7px;
+    letter-spacing: 0.15em;
+  }
+
+  .hero-content {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.7rem, 13vw, 5rem);
+  }
+
+  .hero-subtitle {
+    font-size: 12px;
+  }
+
+  .watermark-btn {
+    margin-top: 28px;
+  }
+
+  .live-readout {
+    top: calc(50% + 125px);
+    font-size: clamp(15px, 4vw, 20px);
+    letter-spacing: 0.06em;
   }
 }

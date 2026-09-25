@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex,nofollow" />
+
     <title>Avalon20 • A Birthday Story</title>
+
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -35,32 +36,78 @@
     />
     <meta name="twitter:image" content="/og-image.png" />
 
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#3a080d" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <link
-      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@500;600;700;800&family=Space+Mono:wght@400;700&display=swap"
       rel="stylesheet"
     />
   </head>
+
   <body>
+    <!-- Opening counter -->
     <div class="intro" id="intro">
-      <div class="intro-num" id="introNum">0</div>
-      <div class="intro-label">loading memories...</div>
+      <div class="curtain-light-row">
+        <span></span><span></span><span></span><span></span> <span></span
+        ><span></span><span></span><span></span> <span></span><span></span
+        ><span></span><span></span>
+      </div>
+
+      <div class="intro-center">
+        <div class="intro-kicker">A LITTLE SOMETHING FOR YOU</div>
+
+        <div class="intro-num" id="introNum">0</div>
+
+        <div class="intro-label">getting everything ready...</div>
+      </div>
     </div>
 
+    <!-- Main opening page -->
     <div class="hero" id="hero">
-      <button
-        class="watermark-btn"
-        id="triggerBtn"
-        aria-label="Press to reveal your age"
-      >
-        <span class="watermark" id="watermark">00</span>
-        <span class="reveal-flash" id="revealFlash"></span>
-      </button>
+      <div class="marquee-top">
+        <span>✦</span>
+        <span>SEPTEMBER 29</span>
+        <span>•</span>
+        <span>A DAY WORTH CELEBRATING</span>
+        <span>•</span>
+        <span>SEPTEMBER 29</span>
+        <span>✦</span>
+      </div>
 
-      <span class="corner br" id="liveReadout">—</span>
+      <div class="hero-content">
+        <div class="hero-kicker">TO MY FAVORITE PERSON</div>
+
+        <h1 class="hero-title">cheesecake🧀</h1>
+
+        <div class="hero-subtitle">This celebration is especially for you</div>
+
+        <button
+          class="watermark-btn"
+          id="triggerBtn"
+          aria-label="Press to reveal your age"
+        >
+          <span class="age-display">
+            <span class="display-label">ONE MORE YEAR OF YOU</span>
+            <span class="watermark" id="watermark">00</span>
+            <span class="display-bottom">OPEN THE NEXT CHAPTER</span>
+          </span>
+
+          <span class="reveal-flash" id="revealFlash"></span>
+        </button>
+
+        <div class="press-prompt" id="pressPrompt">
+          <span class="prompt-line"></span>
+          <span> </span>
+          <span class="prompt-line"></span>
+        </div>
+
+        <div class="doors-open">YOUR STORY STARTS HERE</div>
+
+        <div class="live-readout" id="liveReadout">—</div>
+      </div>
     </div>
 
     <div class="ember-layer" id="emberLayer"></div>
