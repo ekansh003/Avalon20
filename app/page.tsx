@@ -32,7 +32,7 @@ export default function Home() {
       {/* PAGE 1 — AGE REVEAL */}
       <section className="h-screen w-full snap-start snap-always shrink-0 overflow-visible relative z-10">
         <iframe
-          src="/avalon20.html"
+          src="/index.html"
           title="Birthday Reveal"
           style={{
             width: "100vw",

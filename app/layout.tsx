@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+
 import { Geist, Geist_Mono } from "next/font/google";
+
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,14 +16,14 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Avalon20",
-    template: "%s | Avalon20",
+    default: "Cheesecake 🧀",
+    template: "%s | Cheesecake 🧀",
   },
 
   description:
     "A handcrafted birthday experience filled with memories, surprises, and love.",
 
-  applicationName: "Avalon20",
+  applicationName: "Cheesecake",
 
   authors: [
     {
@@ -32,7 +34,7 @@ export const metadata: Metadata = {
   creator: "Ekansh",
 
   keywords: [
-    "Avalon20",
+    "Cheesecake",
     "Birthday",
     "Birthday Gift",
     "Memories",
@@ -40,17 +42,21 @@ export const metadata: Metadata = {
     "Special Surprise",
   ],
 
-  // Replace this after deployment
-  metadataBase: new URL("https://avalon20.vercel.app/"),
+  /*
+   * Replace this with your final deployed URL
+   * after you rename the Vercel project/domain.
+   */
+  metadataBase: new URL("https://YOUR-DOMAIN-HERE"),
 
   openGraph: {
-    title: "Avalon20",
+    title: "Cheesecake 🧀",
+
     description:
       "A handcrafted birthday experience filled with memories, surprises, and love.",
 
-    url: "https://avalon20.vercel.app/",
+    url: "https://YOUR-DOMAIN-HERE",
 
-    siteName: "Avalon20",
+    siteName: "Cheesecake",
 
     locale: "en_US",
 
@@ -61,7 +67,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Avalon20",
+        alt: "Cheesecake 🧀",
       },
     ],
   },
@@ -69,7 +75,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
 
-    title: "Avalon20",
+    title: "Cheesecake 🧀",
 
     description:
       "A handcrafted birthday experience filled with memories, surprises, and love.",
@@ -79,9 +85,19 @@ export const metadata: Metadata = {
 
   icons: {
     icon: [
-      { url: "/favicon.ico" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      {
+        url: "/favicon.ico",
+      },
+      {
+        url: "/favicon-32x32.png",
+        sizes: "32x32",
+        type: "image/png",
+      },
+      {
+        url: "/favicon-16x16.png",
+        sizes: "16x16",
+        type: "image/png",
+      },
     ],
 
     apple: "/apple-touch-icon.png",
