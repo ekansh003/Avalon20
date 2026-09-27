@@ -5,32 +5,59 @@ export default function PersonalNote() {
     <section className="personal-note">
       <div className="note-page">
         <div className="note-content">
-          <p>{/* Your first paragraph */}</p>
+          <p>
+            "<strong>Happy Birthday my cheesecake🧀</strong>. All of this is me
+            trying to create something for you from what I know, just to make
+            you feel special, coz you are special. I know maine teko pta nhi
+            kitni baar bola h, but still I'm telling you — you are my favourite
+            person, my favourite cousin, and it'll always be like this."
+          </p>
 
-          <p>{/* Your second paragraph */}</p>
+          <p>
+            "You know, whenever something happens, mai sbse phle tujhe hi
+            batata. And mai tujhe vo sb v batata jo mujhe strictly mna hota kisi
+            ko v batana, coz I don't want to keep secrets from you"
+          </p>
 
-          <p>{/* Your third paragraph */}</p>
+          <p>
+            "You know jb hum 1st time properly mile the, I never thought ki
+            hamara itna achha bond hoga and mai aise itna frankly sb kuchh
+            discuss kr paunga. Meko aisa tha ki jaise sare cousins h, vaise tu v
+            h — like aise jb kbhi milenge to thora bhut hi hello and then avoid.
+            But then I got to know you, and tb meko pta chla ki nhi, tu baki sb
+            ki trh nhi h. You are different. And the rest is history 😁"
+          </p>
 
-          <p>{/* Your fourth paragraph */}</p>
+          <p>
+            "Also pta h, mai aise excited rehta hu for you to yap. Meko mja ata
+            h jb tu aise cheeje batati h. And you know I'm waiting ki hum next
+            kb milenge. Aise nhi h ki milke hum kuch extraordinary kr lete h,
+            but still, samne se baat krne me jada mja ata h."
+          </p>
+          <p>
+            "Also, I'm not going to make it long ki tu padhte-padhte bore ho
+            jay. So I'm ending it here. And lastly...{" "}
+            <strong>Happy Birthday, babu..... ❤️</strong>"
+          </p>
         </div>
       </div>
 
       <style jsx>{`
         .personal-note {
-          position: relative;
           width: 100%;
-          height: 100vh;
           min-height: 100vh;
-          background-color: #000;
+          background: #000;
           display: flex;
           align-items: center;
           justify-content: center;
           overflow: hidden;
+          padding: 40px;
+          box-sizing: border-box;
         }
 
         .note-page {
           position: relative;
-          width: min(1200px, 88vw);
+          width: min(92vw, 1500px);
           aspect-ratio: 1658 / 911;
           background-image: url("/pages/burnedPage.png");
           background-repeat: no-repeat;
@@ -41,20 +68,23 @@ export default function PersonalNote() {
 
         .note-content {
           position: absolute;
-          width: 62%;
-          left: 19%;
-          top: 50%;
-          transform: translateY(-50%);
-          color: #261914;
-          font-family: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive;
-          font-size: clamp(16px, 1.35vw, 21px);
-          line-height: 1.85;
+          left: 17%;
+          right: 17%;
+          top: 18%;
+          bottom: 20%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          color: #292019;
+          font-family: "Lora", Georgia, "Times New Roman", serif;
+          font-size: clamp(16px, 1.35vw, 22px);
+          line-height: 1.5;
+          font-weight: 400;
           text-align: left;
         }
 
         .note-content p {
-          margin: 0 0 28px;
-          padding: 0;
+          margin: 0 0 10px;
         }
 
         .note-content p:last-child {
@@ -63,8 +93,7 @@ export default function PersonalNote() {
 
         @media (max-width: 700px) {
           .personal-note {
-            height: 100vh;
-            min-height: 100vh;
+            padding: 20px 10px;
           }
 
           .note-page {
@@ -72,15 +101,16 @@ export default function PersonalNote() {
           }
 
           .note-content {
-            width: 64%;
-            left: 18%;
-            top: 50%;
+            left: 17%;
+            right: 17%;
+            top: 16%;
+            bottom: 14%;
             font-size: 11px;
-            line-height: 1.65;
+            line-height: 1.55;
           }
 
           .note-content p {
-            margin-bottom: 14px;
+            margin-bottom: 10px;
           }
         }
       `}</style>
