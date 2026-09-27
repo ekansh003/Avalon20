@@ -63,7 +63,7 @@ export const Hero = () => {
       </div>
 
       {/* The trail — moved up under the headline, full-bleed edge to edge, tilted */}
-      <div className=" absolute top-40 left-1/2 mt-0 w-screen -rotate-10 -translate-x-1/2 ">
+      <div className=" absolute top-30 left-1/2 mt-0 w-screen -rotate-10 -translate-x-1/2 ">
         <PhotoReel
           path={path}
           viewBox="0 0 996 330"
