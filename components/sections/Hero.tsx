@@ -42,7 +42,7 @@ export const Hero = () => {
       {/* Top row: quiet date stamp, nothing else competing for attention */}
       <div className="hero-mono flex items-center justify-between px-8 pt-8 text-[11px] uppercase tracking-[0.25em] text-[#8A8A80] sm:px-14">
         <span>Sep 29</span>
-        <span>level 20</span>
+        <span>level 19</span>
       </div>
 
       {/* Headline — centered in the upper half, generous but not stretched to fill the screen */}
