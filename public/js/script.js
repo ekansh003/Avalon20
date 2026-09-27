@@ -1,4 +1,12 @@
-const BIRTH_DATE = new Date(2007, 8, 29, 13, 20, 0);
+const BIRTH_DATE = new Date(2007, 8, 29, 0, 0, 0);
+
+// ---------------- birthday melody ----------------
+const birthdaySong = new Audio("/audio/happy-birthday.mp3");
+
+birthdaySong.preload = "auto";
+birthdaySong.volume = 0.85;
+
+const SONG_DURATION = 18000;
 
 function computeParts() {
   const now = new Date();
@@ -391,9 +399,24 @@ function burnAndRelease() {
         ease: "power2.out",
       });
 
+      // Birthday animation
+      window.dispatchEvent(new CustomEvent("birthday-rise"));
+
+      // ---------------- PLAY BIRTHDAY SONG ----------------
+      birthdaySong.currentTime = 0;
+
+      birthdaySong.play().catch((error) => {
+        console.warn("Birthday song could not start:", error);
+      });
+
+      // ---------------- WAIT 18 SECONDS ----------------
       setTimeout(() => {
+        birthdaySong.pause();
+        birthdaySong.currentTime = 0;
+
+        // Tell the main Next.js page to move to the next section
         window.parent.postMessage({ type: "birthday-scroll-next" }, "*");
-      }, 1500);
+      }, SONG_DURATION);
 
       gsap.to(pressPrompt, {
         opacity: 0,
