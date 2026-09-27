@@ -1,7 +1,10 @@
 "use client";
 
 import { Caveat } from "next/font/google";
-import { DraggableCardBody, DraggableCardContainer } from "../effects/DraggableCards";
+import {
+  DraggableCardBody,
+  DraggableCardContainer,
+} from "../effects/DraggableCards";
 
 const handwriting = Caveat({
   subsets: ["latin"],
@@ -86,6 +89,38 @@ export default function LoveGallery() {
         after:bg-[radial-gradient(circle,transparent_30%,rgba(0,0,0,0.08))]
       "
     >
+      <div
+        className={`
+    absolute
+    inset-0
+    flex
+    items-center
+    justify-center
+    pointer-events-none
+    select-none
+    z-0
+  `}
+      >
+        <h2
+          className={`
+      ${handwriting.className}
+      text-center
+      text-[10vw]
+      leading-[0.8]
+      font-bold
+      uppercase
+      text-[#9C7A3F]
+      opacity-[0.2]
+      max-w-[90vw]
+    `}
+        >
+          Some of My
+          <br />
+          Favorite Versions
+          <br />
+          of You
+        </h2>
+      </div>
       {memories.map((memory) => (
         <DraggableCardBody
           key={memory.image}
