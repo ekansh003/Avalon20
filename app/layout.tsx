@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "A handcrafted birthday experience filled with memories, surprises, and love.",
+    "A little effort from me to make your birthday special. Happy Birthday, babu!!",
 
   applicationName: "Cheesecake",
 
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     title: "Cheesecake 🧀",
 
     description:
-      "A handcrafted birthday experience filled with memories, surprises, and love.",
+      "A little effort from me to make your birthday special. Happy Birthday, babu!!",
 
     url: "https://cheesecake19.vercel.app/",
 
