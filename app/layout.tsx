@@ -42,11 +42,7 @@ export const metadata: Metadata = {
     "Special Surprise",
   ],
 
-  /*
-   * Replace this with your final deployed URL
-   * after you rename the Vercel project/domain.
-   */
-  metadataBase: new URL("https://YOUR-DOMAIN-HERE"),
+  metadataBase: new URL("https://cheesecake19.vercel.app/"),
 
   openGraph: {
     title: "Cheesecake 🧀",
@@ -54,7 +50,7 @@ export const metadata: Metadata = {
     description:
       "A handcrafted birthday experience filled with memories, surprises, and love.",
 
-    url: "https://YOUR-DOMAIN-HERE",
+    url: "https://cheesecake19.vercel.app/",
 
     siteName: "Cheesecake",
 
