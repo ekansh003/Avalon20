@@ -585,7 +585,7 @@ body {
   position: absolute;
 
   left: 50%;
-  top: calc(50% + 205px);
+  top: calc(50% + 200px);
 
   transform: translateX(-50%);
 

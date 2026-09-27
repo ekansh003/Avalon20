@@ -65,7 +65,7 @@ export default function Home() {
       </section>
 
       {/* PAGE 5 */}
-      <section className="h-screen w-full overflow-y-scroll snap-start snap-always shrink-0 relative">
+      <section className="h-screen w-full snap-start snap-always shrink-0 relative">
         <PersonalNote />
       </section>
     </div>

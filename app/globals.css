@@ -118,4 +118,34 @@ a[href*="spline.design"] {
   background: #22c55e;
 }
 
+::-webkit-scrollbar {
+  width: 3px;
+}
 
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #5a0404;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5a0404;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+/* Remove the little arrows at the top and bottom */
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #5a0404 transparent;
+}
